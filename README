@@ -1,0 +1,7 @@
+Rezolvarea temei 0 de la PCLP1, anul 1 CTI seria B
+
+contine 2 fisiere de cod: task1.c si task2.c, corespondente celor 2 taskuri din cerinta, un Makefile si README-ul de fata
+
+Task 1 presupune efectuarea sumei si inmultirii a 2 numere citite de la tastatura
+
+Task 2 presupune un fizz buzz inlocuit cu Trick or Treat, pe numere 7 si 11
