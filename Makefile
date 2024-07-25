@@ -1,7 +1,8 @@
 CFLAGS=-Wall -Werror
 
 clean:
-	rm -f myexe
+	rm -f myexe result
+	rm -r tests-out
 
 run-task1:
 	gcc task1.c $(CFLAGS) -o myexe

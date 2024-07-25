@@ -1,0 +1,378 @@
+<html>
+    <head>
+        <title>PCLP1 2023 Cerinta Tema 0</title>
+    </head>
+
+    <body>
+        <div class="left_page">
+          
+            <h1 class="sectionedit1" id="tema_0_-_trickortreat">Tema 0 - TrickOrTreat</h1>
+            <div class="level1">
+            
+            </div>
+            
+            <h3 class="sectionedit2" id="changelog">Changelog:</h3>
+            <div class="level3">
+            <ul>
+            <li class="level1"><div class="li"> 05 Nov 2023: updatat secțiunea <strong>Trimitere tema</strong>; deadline soft 12nov și hard 15nov</div>
+            </li>
+            </ul>
+            
+            </div>
+            
+            <h3 class="sectionedit3" id="responsabili">Responsabili:</h3>
+            <div class="level3">
+            <ul>
+            <li class="level1"><div class="li"> Alin Popa</div>
+            </li>
+            </ul>
+            
+            <p>
+            Termen de predare:
+            </p>
+            <ul>
+            <li class="level1"><div class="li"> Deadline soft: <strong>Duminică 12 Noiembrie 2023, 23:55</strong></div>
+            </li>
+            <li class="level1"><div class="li"> Deadline hard: <strong>Miercuri 15 Noiembrie 2023, 23:55</strong></div>
+            </li>
+            </ul>
+            
+            <p>
+            Aceasta este o temă de “încălzire”.
+            Scopul acesteia este să vă obișnuiți cu infrastructura de testare automată a temelor.
+            Această infrastructură va fi folosită la toate temele ulterioare.
+            </p>
+            
+            <p>
+            Pentru fiecare zi (24 de ore) de întârziere, se vor scădea 10 puncte din nota acordată, până la atingerea deadline-ului hard.
+            </p>
+            
+            </div>
+            
+            <h3 class="sectionedit4" id="intrebari">Întrebări</h3>
+            <div class="level3">
+            
+            <p>
+            Dacă aveți nelămuriri, puteți să ne contactați pe forumul dedicat <a href="https://curs.upb.ro/2023/mod/forum/view.php?id=57385" class="urlextern" title="https://curs.upb.ro/2023/mod/forum/view.php?id=57385"  rel="nofollow">temei de casă nr. 0</a> sau pe <a href="https://teams.microsoft.com/l/channel/19%3a0a648c85e9ed4a2bbb343b5792443551%40thread.tacv2/Tema%25200?groupId=1f7c7112-0ea2-4f0b-9131-d5c29590d62c&amp;tenantId=2d8cc8ba-8dda-4334-9e5c-fac2092e9bac" class="urlextern" title="https://teams.microsoft.com/l/channel/19%3a0a648c85e9ed4a2bbb343b5792443551%40thread.tacv2/Tema%25200?groupId=1f7c7112-0ea2-4f0b-9131-d5c29590d62c&amp;tenantId=2d8cc8ba-8dda-4334-9e5c-fac2092e9bac"  rel="nofollow">canalul Temei 0</a>.<br/>
+            
+            La orice întrebare vom răspunde în maxim 24 de ore.<br/>
+            
+            Nu se acceptă întrebări în ultimele 24 de ore înainte de deadline.
+            </p>
+            
+            <p>
+            <p><div class="notewarning">
+            Atenție:
+            </p>
+            <ul>
+            <li class="level1"><div class="li"> Citiți cu atenție tot enunțul temei.</div>
+            </li>
+            <li class="level1"><div class="li"> Respectați întocmai regulile de încarcare a arhivei. Dacă uitați să includeți fișierele sursă sau Makefile-ul în arhivă, veți primi 0 pe temă.</div>
+            </li>
+            <li class="level1"><div class="li"> Respectați întocmai instrucțiunile de scriere a fișierului <code>Makefile</code>. Checkerul folosește acest fișier pentru a vă rula tema. Dacă el nu este scris corect, veți primi 0 pe temă chiar dacă codul sursă este ok.</div>
+            </li>
+            <li class="level1"><div class="li"> <strong>La trimiterea arhivei pe Moodle, tema vă este corectată automat, pe loc. Verificați secțiunea “Feedback” pentru a afla punctajul. Dacă vă apar erori și/sau nu apare punctajul obținut (în format numeric e.g. 85/100) înseamnă că tema voastră nu a fost rulată și veți primi 0 pe temă dacă nu rezolvați eroarea.</strong></div>
+            </li>
+            <li class="level1"><div class="li"> Puteți retrimite tema de oricate ori vreți înainte de expirarea deadline-ului. Se va lua în considerare numai ultima variantă trimisă.</div>
+            </li>
+            </ul>
+            
+            <p>
+            
+            </div></p>
+            </p>
+            
+            </div>
+            
+            <h2 class="sectionedit5" id="intro_makefile">Intro Makefile</h2>
+            <div class="level2">
+            
+            <p>
+            <code>make</code> este un utilitar cu care putem automatiza compilarea de fișiere C, pe baza unui set de reguli descris într-un fișier numit <code>Makefile</code>. 
+            Un fișier <code>Makefile</code> este format din linii cu următoarea sintaxă: <code>[nume-regula]: [dependente]</code> urmată de lista de comenzi care se execută când această regulă este apelată. O regulă poate avea unul sau mai multe fișiere ca dependențe. La apelarea unei reguli, utilitarul <code>make</code> verifică automat dacă aceste fișiere există înainte de a executa comenzile din cadrul regulii. Dacă unul din ele nu există, atunci înainte de comenzile asociate regulii apelate se va apela automat regula cu același nume ca fișierul lipsă.
+            </p>
+            
+            <p>
+            Să analizăm un exemplu de fișier <code>Makefile</code>:
+            <p><div class="noteclassic">
+            </p>
+            <pre class="code">CFLAGS=-Wall -Werror
+            
+            .PHONY: clean run
+            
+            run: myexe
+                ./myexe
+            
+            myexe: main.c
+                gcc main.c $(CFLAGS) -o myexe
+            
+            clean:
+                rm -f myexe</pre>
+            
+            <p>
+            
+            </div></p>
+            </p>
+            
+            <p>
+            Avem următoarele elemente:
+            </p>
+            <ul>
+            <li class="level1"><div class="li"> o regulă <code>myexe</code> care depinde de fișierul <code>main.c</code>. Această regulă compilează fișierul <code>main.c</code> si generează un executabil cu numele <code>myexe</code></div>
+            </li>
+            <li class="level1"><div class="li"> o regulă <code>run</code> care depinde de fișierul <code>myexe</code>. Această regulă rulează executabilul <code>myexe</code></div>
+            </li>
+            <li class="level1"><div class="li"> o regulă <code>clean</code> care șterge executabilul generat.</div>
+            </li>
+            <li class="level1"><div class="li"> o variabilă numită <code>CFLAGS</code> care conține string-ul <code>-Wall -Werror</code> și care este folosită la compilare. În cazul în care dorim să compilăm mai multe fișiere folosind același <code>Makefile</code>, putem refolosi variabila în loc sa repetăm flag-urile pentru fiecare utilizare <code>gcc</code>.</div>
+            </li>
+            <li class="level1"><div class="li"> o linie care marchează regulile <code>clean</code> și <code>run</code> ca reguli de tip <code>PHONY</code>. Asta îi spune utilitarului <code>make</code> că aceste reguli <strong>NU</strong> au rolul de a genera un fișier cu același nume (<code>clean</code> și <code>run</code>). Spre exemplu pentru regula <code>run</code>, fără mențiunea <code>PHONY</code>, la apelarea acestei reguli utilitarul <code>make</code> nu ar mai executa comenzile asociate dacă în același director ar exista un fișier numit <code>run</code>, deoarece ar considera că rularea regulii nu e necesară întrucât fișierul este deja generat. Dacă folosim <code>PHONY</code>, acea regulă se va rula mereu, chiar dacă deja există un fișier cu acel nume. Atentie: <code>make</code> rulează mereu o regulă dacă dependentele ei au fost modificate mai recent decât fișierul produs de către regulă. Exemplu: dacă rulăm regula <code>myexe</code>, chiar dacă executabilul <code>myexe</code> este deja generat, dacă fișierul <code>main.c</code> a fost modificat între timp, <code>make</code> va rula regula din nou (adică <code>main.c</code> va fi recompilat și vom obține un nou <code>myexe</code>, ceea ce este rezultatul dorit).</div>
+            </li>
+            </ul>
+            
+            <p>
+            Pentru rularea unei reguli, scriem în terminal: <code>make [nume-regula]</code>.
+            Exemplu:
+            </p>
+            <ul>
+            <li class="level1"><div class="li"> pentru (re)compilarea codului și rularea executabilului: <code>make run</code></div>
+            </li>
+            <li class="level1"><div class="li"> doar pentru (re)compilarea codului: <code>make myexe</code></div>
+            </li>
+            <li class="level1"><div class="li"> pentru stergerea executabilului generat: <code>make clean</code></div>
+            </li>
+            </ul>
+            
+            </div>
+            
+            <h2 class="sectionedit6" id="cerinta">Cerință</h2>
+            <div class="level2">
+            
+            </div>
+            
+            <h3 class="sectionedit7" id="task0">Task0</h3>
+            <div class="level3">
+            
+            <p>
+            Scrieți un fișier <code>Makefile</code> care să conțină următoarele reguli obligatorii:
+            </p>
+            <ul>
+            <li class="level1"><div class="li"> <code>run-task1</code>: (re)compilează și rulează codul pentru taskul 1</div>
+            </li>
+            <li class="level1"><div class="li"> <code>run-task2</code>: (re)compilează și rulează codul pentru taskul 2</div>
+            </li>
+            <li class="level1"><div class="li"> puteti folosi orice alte reguli suplimentare pe care le considerați necesare</div>
+            </li>
+            </ul>
+            
+            </div>
+            
+            <h3 class="sectionedit8" id="task1_20p">Task1 (20p)</h3>
+            <div class="level3">
+            
+            <p>
+            Scrieți un program care citește de la standard input (tastatură) două numere întregi, <strong>a</strong> și <strong>b</strong>.
+            Programul trebuie să afișeze suma și produsul numerelor, în următorul format:
+            </p>
+            <pre class="code">Suma este [suma]
+            Produsul este [produs]</pre>
+            
+            <p>
+            <p><div class="noteclassic">
+            Exemplu utilizare:
+            </p>
+            <pre class="code">make clean
+            make run-task1
+            2 3
+            Suma este 5
+            Produsul este 6</pre>
+            
+            <p>
+            
+            </div></p>
+            </p>
+            
+            </div>
+            
+            <h3 class="sectionedit9" id="task2_70p">Task2 (70p)</h3>
+            <div class="level3">
+            
+            <p>
+            Scrieți un program care citește de la standard input (tastatură) un număr natural, <strong>N</strong>.
+            Pentru toate valorile din intervalul <strong>[1, N]</strong>, programul va afișa, separate printr-un spațiu (<strong> </strong>):
+            </p>
+            <ul>
+            <li class="level1"><div class="li"> cuvântul <strong>Trick</strong> dacă valoarea curentă este divizibilă cu <strong>7</strong></div>
+            </li>
+            <li class="level1"><div class="li"> cuvântul <strong>Treat</strong> dacă valoarea curentă este divizibilă cu <strong>11</strong></div>
+            </li>
+            <li class="level1"><div class="li"> cuvântul <strong>TrickOrTreat</strong> dacă valoarea curentă este divizibilă cu <strong>7</strong> și cu <strong>11</strong></div>
+            </li>
+            <li class="level1"><div class="li"> valoarea curentă, atunci când aceasta nu este divizibilă cu <strong>7</strong> sau <strong>11</strong></div>
+            </li>
+            </ul>
+            
+            <p>
+            <p><div class="noteclassic">
+            Exemplu utilizare:
+            </p>
+            <pre class="code">make clean
+            make run-task2
+            11
+            1 2 3 4 5 6 Trick 8 9 10 Treat</pre>
+            
+            <p>
+            
+            </div></p>
+            </p>
+            
+            </div>
+            
+            <h3 class="sectionedit10" id="coding_style">Coding Style</h3>
+            <div class="level3">
+            
+            <p>
+            Este foarte important, pentru orice proiect, ca codul sursă să fie ușor de citit.
+            Astfel, de-a lungul timpului, comunitatea programatorilor a agreat un set de reguli pe care programatorii trebuie să-l respecte atunci când scriu cod. Acest set de reguli poartă numele de <strong>Coding style</strong> și include directive precum:
+            </p>
+            <ul>
+            <li class="level1"><div class="li"> utilizarea unor nume descriptive / intuitive pentru variabile care să descrie intenția utilizării variabilei - nu folosim <strong>x</strong>, folosim <strong>num_elems</strong></div>
+            </li>
+            <li class="level1"><div class="li"> nu utilizăm <a href="https://en.wikipedia.org/wiki/Magic_number_(programming)" class="urlextern" title="https://en.wikipedia.org/wiki/Magic_number_(programming)"  rel="nofollow">numere magice</a>; le ținem într-o variabilă care are un nume descriptiv</div>
+            </li>
+            <li class="level1"><div class="li"> indentăm codul</div>
+            </li>
+            <li class="level1"><div class="li"> etc.</div>
+            </li>
+            </ul>
+            
+            <p>
+            În funcție de echipa / compania / proiectul la care veți lucra, coding style-ul poate diferi, în funcție de ce a fost agreat anterior, și vă veți adapta acelui stil.<br/>
+            
+            În cadrul cursului de programare vom folosi regulile definite de către <a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines" class="urlextern" title="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines"  rel="nofollow"> Cpp Core Guidelines</a>.
+            Acestea sunt verificate în mod automat de către checker.
+            </p>
+            
+            </div>
+            
+            <h3 class="sectionedit11" id="validare_locala_tema">Validare locală temă</h3>
+            <div class="level3">
+            
+            <p>
+            Pentru a vă ajuta în dezvoltarea temei, arhiva <a href="/courses/_media/programare/teme_2023/trickortreat.zip" class="media mediafile mf_zip" title="programare:teme_2023:trickortreat.zip (193.5 KB)">trickortreat.zip</a> conține o copie a checkerului.
+            </p>
+            
+            <p>
+            Pentru a instala dependențele necesare verificării pentru <strong>coding style</strong> utilizați scriptul <strong>install-linters.sh</strong>:
+            </p>
+            <pre class="code">./install-linters.sh</pre>
+            
+            <p>
+            Pentru a rula checkerul local folosiți comanda:
+            </p>
+            <pre class="code">./check.sh</pre>
+            
+            <p>
+            <p><div class="noteclassic">
+            Codul sursă este compilat folosind flagurile <strong>-Wall -Werror</strong>:
+            </p>
+            <ul>
+            <li class="level1"><div class="li"> <strong>-Wall</strong> - compilatorul va avertiza (warn) orice operații care pot genera un comportament nedefinit</div>
+            </li>
+            <li class="level1"><div class="li"> <strong>-Werror</strong> - compilatorul va trata warningurile ca pe niște erori de compilare</div>
+            </li>
+            </ul>
+            
+            <p>
+            
+            </div></p>
+            </p>
+            
+            </div>
+            
+            <h3 class="sectionedit12" id="trimitere_tema">Trimitere temă</h3>
+            <div class="level3">
+            
+            <p>
+            Tema va fi trimisă folosind <a href="https://curs.upb.ro/2023/mod/assign/view.php?id=60408" class="urlextern" title="https://curs.upb.ro/2023/mod/assign/view.php?id=60408"  rel="nofollow">Moodle</a>, cursul <strong>Programarea Calculatoarelor (CB &amp; CD)</strong>, activitatea “Tema 0”. <br/>
+            
+            </p>
+            
+            <p>
+            Toate temele sunt testate în mod automat pe Moodle.
+            </p>
+            
+            <p>
+            Arhiva temei se va încărca folosind formularul de submisie (butonul <strong>Add submission</strong>.
+            </p>
+            
+            <p>
+            Rezultatele vor fi disponibile în secțiunea <strong>Feedback</strong> - nota apare la linia <strong>Grade</strong>, iar outputul checkerului și erorile apar la sectiunea <strong>Feedback comments</strong>. Dacă apare un buton albastru în formă de plus, trebuie să dați click pe el pentru a afișa întregul output al checkerului.<br/>
+            
+            <strong>Citiți cu atenție</strong> informațiile afișate în <strong>Feedback</strong> pentru a vă asigura că tema a fost rulată cu succes; o eroare comună este dată de faptul că conținutul arhivei nu respectă structura dorită (ex. fișierele sunt într-un alt director).<br/>
+            
+            </p>
+            
+            <p>
+            <strong>Punctajul final al temei</strong> este afișat la linia <strong>Grade</strong> și la finalul outputului din checker.
+            </p>
+            
+            <p>
+            Conținutul arhivei trebuie să fie următorul:
+            </p>
+            <ol>
+            <li class="level1"><div class="li"> Fișierele <strong>.c</strong>, <strong>.h</strong> (dacă este cazul) care conțin implementarea temei.</div>
+            </li>
+            <li class="level1"><div class="li"> Fișierul <strong>Makefile</strong>.</div>
+            </li>
+            <li class="level1"><div class="li"> Un fișier <a href="https://en.wikipedia.org/wiki/README" class="urlextern" title="https://en.wikipedia.org/wiki/README"  rel="nofollow">README</a> în care descrieți rezolvarea temei.</div>
+            </li>
+            </ol>
+            
+            <p>
+            <p><div class="notewarning">
+            Arhiva trebuie să fie de tipul <strong>zip</strong>.
+            
+            </div></p>
+            </p>
+            
+            <p>
+            <p><div class="notewarning">
+            Nu includeti fisierele checkerului in arhiva voastra.
+            
+            </div></p>
+            </p>
+            
+            <p>
+            <p><div class="notewarning">
+            In cazul in care testele va trec local, insa pica pe vmchecker cel mai probabil aveti
+            o sursa de “undefined behavior in cod”. Pentru a va asigura ca scapati de aceste probleme,
+            compilati cu flagul de compilare `-Wall` si rezolvati toate warning-urile.
+            
+            </div></p>
+            </p>
+            
+            </div>
+            
+            <h4 id="lista_depunctari">Listă depunctări</h4>
+            <div class="level4">
+            
+            <p>
+            Lista nu este exhaustivă.
+            </p>
+            <ul>
+            <li class="level1"><div class="li"> O temă care nu compilează și nu a rulat pe <strong>vmchecker</strong> nu va fi luată în considerare</div>
+            </li>
+            <li class="level1"><div class="li"> O temă care nu rezolvă cerința și trece testele prin alte mijloace nu va fi luată în considerare</div>
+            </li>
+            <li class="level1"><div class="li"> <strong>NU acceptăm teme copiate</strong>. În cazul unei teme copiate se scade punctajul aferent temei din punctajul total. </div>
+            </li>
+            <li class="level1"><div class="li"> [-20.0]: Nerezolvarea tuturor erorilor și warningurilor de coding style </div>
+            </li>
+            </ul>
+            
+            </div>
+            
+                    </div>
+    </body>
+</html>
